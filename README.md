@@ -6,6 +6,7 @@
 $ pip install poetry # Installs poetry to your system if it is not already
 $ poetry install # Installs the project in a virtual environment
 $ poetry run pre-commit install # Installs pre-commit, which will prevent you from committing should your code not pass linting
+$ git config --local push.autoSetupRemote true # auto pushes and sets up your remote origin branch
 ```
 
 ## Programming
