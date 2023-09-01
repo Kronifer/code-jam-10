@@ -23,3 +23,7 @@ ul li:before{
     content: "\2192";
     margin: 1em;
 }
+
+form {
+    text-align-last: center;
+}
