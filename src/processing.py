@@ -1,23 +1,20 @@
 import random
 import typing
-from string import ascii_lowercase
 
 from PIL import Image
+
+ASCII_VALUES = list(range(97, 123)) + [32, 33, 44, 46]  # "a"-"z", " ", "!", ",", "."
 
 
 def generate_alphabet(key: str) -> dict:
     """Generates the A-channel offset of each character in the alphabet using a pre-set key."""
     random.seed(key)
-    alphabet = {i: 0 for i in ascii_lowercase}
-    alphabet[" "] = 0
-    for i in alphabet.keys():
-        value = random.randint(1, 28)
-        if value in alphabet.values():
-            while True:
-                value = random.randint(1, 28)
-                if value not in alphabet.values():
-                    break
-        alphabet[i] = value
+    alphabet = {}
+    for i in ASCII_VALUES:
+        value = random.randint(1, len(ASCII_VALUES) + 1)
+        while value in alphabet.values():
+            value = random.randint(1, len(ASCII_VALUES) + 1)
+        alphabet[chr(i)] = value
     return alphabet
 
 
@@ -42,9 +39,11 @@ def write_message(image: Image.Image, message: str, key: str) -> typing.Tuple[Im
     yc.sort()
     for i in range(len(message)):
         coords.append((xc[i], yc[i]))
-    for i in range(len(message)):
+    for i, letter in enumerate(message):
+        if not (ord(letter) in ASCII_VALUES):
+            return image, False
         pixel = list(image.getpixel(coords[i]))
-        pixel[-1] -= alphabet[message[i]]
+        pixel[-1] -= alphabet[letter]
         image.putpixel(coords[i], tuple(pixel))
     return image, True
 
