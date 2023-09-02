@@ -20,7 +20,14 @@ def encode():  # noqa: D103
         return render_template("encode.html")
     io = BytesIO()
     image = Image.open(request.files.get("image").stream)
-    write_message(image, request.form["message"], request.form["key"])[0].save(io, format="PNG")
+    image, status = write_message(image, request.form["message"].lower(), request.form["key"])
+    if not status:
+        return (
+            "ERROR: Please make sure your message is not too long, and that you don't have any unicode characters in your message (no emojis).",  # noqa: E501
+            400,
+            {"Content-Type": "text/plain"},
+        )
+    image.save(io, "PNG")
     io.seek(0)
     return render_template("display.html", src=f"data:image/png;base64,{base64.b64encode(io.read()).decode('utf-8')}")
 
@@ -30,7 +37,7 @@ def decode():  # noqa: D103
     if request.method == "GET":
         return render_template("decode.html")
     image = Image.open(request.files.get("image").stream)
-    return read_message(image, request.form["key"])
+    return read_message(image, request.form["key"]), {"Content-Type": "text/plain"}
 
 
 app.run("127.0.0.1", 8080)  # TODO: Replace with Gunicorn
