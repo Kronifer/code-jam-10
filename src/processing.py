@@ -28,6 +28,7 @@ def write_message(image: Image.Image, message: str, key: str) -> typing.Tuple[Im
     if image.mode != "RGBA":
         image = image.convert("RGBA")
     if image.size[0] * image.size[1] < len(message):
+        print("Your message is too long.")
         return image, False  # Too large to encode message, so return original image and throw error to client
     xc = []
     yc = []
@@ -41,6 +42,7 @@ def write_message(image: Image.Image, message: str, key: str) -> typing.Tuple[Im
         coords.append((xc[i], yc[i]))
     for i, letter in enumerate(message):
         if not (ord(letter) in ASCII_VALUES):
+            print("Oops. The message contains an invalid character.")
             return image, False
         pixel = list(image.getpixel(coords[i]))
         pixel[-1] -= alphabet[letter]
@@ -50,9 +52,12 @@ def write_message(image: Image.Image, message: str, key: str) -> typing.Tuple[Im
 
 def read_message(image: Image.Image, key: str) -> str:
     """Reads a message from an image encoded with write_message."""
-    alphabet = generate_alphabet(key)
-    message = ""
-    for i in image.getdata():
-        if i[-1] != 255:
-            message += list(alphabet.keys())[list(alphabet.values()).index(255 - i[-1])]
-    return message
+    try:
+        alphabet = generate_alphabet(key)
+        message = ""
+        for i in image.getdata():
+            if i[-1] != 255:
+                message += list(alphabet.keys())[list(alphabet.values()).index(255 - i[-1])]
+        return message
+    except ValueError as ve:
+        return f"ValueError: {ve}. You have entered an invalid key."
