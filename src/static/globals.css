@@ -2,10 +2,12 @@
 
 * {
     font-family: 'Roboto Slab', serif;
+    margin: 0;
 }
 
 h1.title {
     text-align: center;
+    margin-top: 40px;
 }
 
 ul {
@@ -19,11 +21,12 @@ blockquote.para {
     text-align: center;
 }
 
-ul li:before{
+ul li.coding-list:before{
     content: "\2192";
     margin: 1em;
 }
 
-form {
+.center-input {
     text-align-last: center;
+    margin:auto;
 }
