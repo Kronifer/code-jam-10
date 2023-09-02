@@ -29,6 +29,3 @@ build/
 .vscode/
 # MacOS
 .DS_Store
-
-# Test files
-*.png
