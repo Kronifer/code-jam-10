@@ -34,12 +34,4 @@ def decode():  # noqa: D103
     return read_message(image, request.form["key"])
 
 
-@app.route("/generate")
-def generate():  # noqa: D103
-    key = request.args.get("key", None)
-    if key is None:
-        return "Please provide a key using URL flags", 400, {"Content-Type": "text/plain"}
-    return str(generate_alphabet(key)), 200, {"Content-Type": "application/json"}
-
-
 app.run("127.0.0.1", 8080)  # TODO: Replace with Gunicorn
