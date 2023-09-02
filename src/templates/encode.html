@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" href="globals.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='globals.css') }}">
 </head>
 
 <body>
     <h1 class="title">Encode Message</h1>
     <br>
-    <form action="/api/encode" method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
         <input type="text" id="key" name="key" placeholder="Key"><br>
         <input type="text" id="message" name="message" placeholder="Message"><br>
         <input type="file" id="image" name="image" accept="image/png,image/jpeg"><br>
