@@ -1,4 +1,5 @@
 import base64
+import os
 from io import BytesIO
 
 from flask import Flask, render_template, request
@@ -6,7 +7,8 @@ from PIL import Image
 
 from processing import read_message, write_message
 
-app = Flask(__name__)
+template_dir = os.path.abspath("src/assets")
+app = Flask(__name__, template_folder=template_dir)
 
 
 @app.route("/")
