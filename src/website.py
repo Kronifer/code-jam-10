@@ -19,18 +19,19 @@ def encode():  # noqa: D103
     if request.method == "GET":
         return render_template("encode.html")
     io = BytesIO()
-    image = Image.open(request.files.get('image').stream)
-    write_message(image, request.form["message"], request.form["key"])[0].save(io, format="PNG")
+    image = Image.open(request.files.get("image").stream)
+    write_message(image, request.form["message"].lower(), request.form["key"])[0].save(
+        io, format="PNG"
+    )  # Will error out with uppercase
     io.seek(0)
-    return render_template("display.html",
-                           src=f"data:image/png;base64,{base64.b64encode(io.read()).decode('utf-8')}")
+    return render_template("display.html", src=f"data:image/png;base64,{base64.b64encode(io.read()).decode('utf-8')}")
 
 
 @app.route("/decode", methods=["GET", "POST"])
 def decode():  # noqa: D103
     if request.method == "GET":
         return render_template("decode.html")
-    image = Image.open(request.files.get('image').stream)
+    image = Image.open(request.files.get("image").stream)
     return read_message(image, request.form["key"])
 
 
