@@ -24,14 +24,12 @@ $ git push # Pushes to your current remote branch
 Linux:
 ```sh
 $ poetry shell
-$ cd src
 $ gunicorn website:app
 ```
 
 Windows:
 ```sh
 $ poetry shell
-$ cd src
 $ waitress-serve --host "127.0.0.1" website:app
 ```
 
