@@ -7,7 +7,7 @@ from PIL import Image
 
 from processing import read_message, write_message
 
-template_dir = os.path.abspath("src/assets")
+template_dir = os.path.abspath("assets")
 app = Flask(__name__, template_folder=template_dir)
 
 
