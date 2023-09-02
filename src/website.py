@@ -1,21 +1,43 @@
-from flask import Flask, request
+import base64
+import os
+from io import BytesIO
 
-from processing import generate_alphabet
+from flask import Flask, render_template, request
+from PIL import Image
 
-app = Flask(__name__)
+from .processing import read_message, write_message
+
+template_dir = os.path.abspath("src/assets")
+app = Flask(__name__, template_folder=template_dir)
+app.url_map.strict_slashes = False  # Fix issues with some browsers, thanks Grace
 
 
 @app.route("/")
 def index():  # noqa: D103
-    return "<h1>Placeholder, see <a href=/generate>/generate</a> for integration with image_processing module</h1>"
+    return render_template("index.html")
 
 
-@app.route("/generate")
-def generate():  # noqa: D103
-    key = request.args.get("key", None)
-    if key is None:
-        return "Please provide a key using URL flags", 400, {"Content-Type": "text/plain"}
-    return str(generate_alphabet(key)), 200, {"Content-Type": "application/json"}
+@app.route("/encode", methods=["GET", "POST"])
+def encode():  # noqa: D103
+    if request.method == "GET":
+        return render_template("encode.html")
+    io = BytesIO()
+    image = Image.open(request.files.get("image").stream)
+    image, status = write_message(image, request.form["message"].lower(), request.form["key"])
+    if not status:
+        return (
+            "ERROR: Please make sure your message is not too long, and that you don't have any unicode characters in your message (no emojis).",  # noqa: E501
+            400,
+            {"Content-Type": "text/plain"},
+        )
+    image.save(io, "PNG")
+    io.seek(0)
+    return render_template("display.html", src=f"data:image/png;base64,{base64.b64encode(io.read()).decode('utf-8')}")
 
 
-app.run("127.0.0.1", 8080)  # TODO: Replace with Gunicorn
+@app.route("/decode", methods=["GET", "POST"])
+def decode():  # noqa: D103
+    if request.method == "GET":
+        return render_template("decode.html")
+    image = Image.open(request.files.get("image").stream)
+    return read_message(image, request.form["key"]), {"Content-Type": "text/plain"}

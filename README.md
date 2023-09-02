@@ -20,4 +20,17 @@ $ git commit -m "message" # Commits your code to git. Make sure you format or yo
 $ git push # Pushes to your current remote branch
 ```
 
+## Running the program
+Linux:
+```sh
+$ poetry shell
+$ gunicorn src.website:app
+```
+
+Windows:
+```sh
+$ poetry shell
+$ waitress-serve --host "127.0.0.1" src.website:app
+```
+
 Contributors, please let me know if any instructions are unclear!
