@@ -9,6 +9,7 @@ from .processing import read_message, write_message
 
 template_dir = os.path.abspath("src/assets")
 app = Flask(__name__, template_folder=template_dir)
+app.url_map.strict_slashes = False  # Fix issues with some browsers, thanks Grace
 
 
 @app.route("/")
