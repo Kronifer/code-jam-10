@@ -16,7 +16,7 @@ def index():  # noqa: D103
     return render_template("base.html")
 
 
-@app.route("/encode/", methods=["GET", "POST"])
+@app.route("/encode", methods=["GET", "POST"])
 def encode():  # noqa: D103
     if request.method == "GET":
         return render_template("encode.html")
@@ -34,7 +34,7 @@ def encode():  # noqa: D103
     return render_template("display.html", src=f"data:image/png;base64,{base64.b64encode(io.read()).decode('utf-8')}")
 
 
-@app.route("/decode/", methods=["GET", "POST"])
+@app.route("/decode", methods=["GET", "POST"])
 def decode():  # noqa: D103
     if request.method == "GET":
         return render_template("decode.html")
