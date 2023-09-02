@@ -4,7 +4,7 @@ from io import BytesIO
 from flask import Flask, render_template, request
 from PIL import Image
 
-from processing import generate_alphabet, read_message, write_message
+from processing import read_message, write_message
 
 app = Flask(__name__)
 
