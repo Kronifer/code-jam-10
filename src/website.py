@@ -38,6 +38,3 @@ def decode():  # noqa: D103
         return render_template("decode.html")
     image = Image.open(request.files.get("image").stream)
     return read_message(image, request.form["key"]), {"Content-Type": "text/plain"}
-
-
-app.run("127.0.0.1", 8080)  # TODO: Replace with Gunicorn
