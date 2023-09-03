@@ -30,3 +30,15 @@ ul li.coding-list:before{
     text-align-last: center;
     margin:auto;
 }
+
+.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.center-text {
+    text-align: center;
+    margin-top: 20px;
+}
