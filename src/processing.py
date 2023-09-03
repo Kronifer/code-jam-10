@@ -97,7 +97,6 @@ def write_message_rgb(message: str, key: str) -> typing.Tuple[Image.Image, bool]
                 color = [random.randint(0, 255) for _ in range(3)]
             if image.getpixel((x, y)) == (0, 0, 0):
                 image.putpixel((x, y), tuple(color))
-    image.show()
     return image, True
 
 
