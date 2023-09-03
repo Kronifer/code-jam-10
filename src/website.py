@@ -32,7 +32,12 @@ def encode():  # noqa: D103
         )
     image.save(io, "PNG")
     io.seek(0)
-    return render_template("display.html", src=f"data:image/png;base64,{base64.b64encode(io.read()).decode('utf-8')}")
+    return render_template(
+        "encode.html",
+        img_src=f"data:image/png;base64,{base64.b64encode(io.read()).decode('utf-8')}",
+        encode_key=request.form["key"],
+        encode_message=request.form["message"],
+    )
 
 
 @app.route("/decode", methods=["GET", "POST"])
