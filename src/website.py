@@ -45,4 +45,5 @@ def decode():  # noqa: D103
     if request.method == "GET":
         return render_template("decode.html")
     image = Image.open(request.files.get("image").stream)
-    return read_message(image, request.form["key"]), {"Content-Type": "text/plain"}
+    message = read_message(image, request.form["key"])
+    return render_template("decode.html", decoded_text=message)

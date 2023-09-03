@@ -10,4 +10,7 @@
             <input type="submit" class="btn btn-secondary center-input" style="margin:auto;">
         </div>
     </form>
+  {% if decoded_text %}
+    <p class="center-text"> Your decoded text is: {{decoded_text}}</p>
+  {% endif %}
 {% endblock %}
