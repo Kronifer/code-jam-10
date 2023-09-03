@@ -1,5 +1,4 @@
 import base64
-import os
 from io import BytesIO
 
 from flask import Flask, render_template, request
@@ -7,8 +6,7 @@ from PIL import Image
 
 from .processing import read_message_a, write_message_a
 
-template_dir = os.path.abspath("src/assets")
-app = Flask(__name__, template_folder=template_dir)
+app = Flask(__name__)
 app.url_map.strict_slashes = False  # Fix issues with some browsers, thanks Grace
 
 

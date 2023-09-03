@@ -1,6 +1,7 @@
 import random
 import typing
 
+import numpy as np
 from PIL import Image
 
 ASCII_VALUES = list(range(97, 123)) + [32, 33, 44, 46, 63]  # "a"-"z", " ", "!", ",", "."
@@ -52,9 +53,18 @@ def read_message_a(image: Image.Image, key: str) -> str:
     """Reads a message from an image encoded with write_message."""
     alphabet = generate_alphabet_a(key)
     message = ""
-    for i in image.getdata():
-        if i[-1] != 255:
-            message += list(alphabet.keys())[list(alphabet.values()).index(255 - i[-1])]
+    array = np.asarray(image)
+    array = np.where(array[:, :, 3] == 255, 0, array[:, :, 3])
+    xc = []
+    yc = []
+    for i in range(np.count_nonzero(array)):
+        xc.append(random.randint(0, image.size[0]))
+        yc.append(random.randint(0, image.size[1]))
+    nonzero = np.transpose(array.nonzero())[:, (1, 0)]
+    for index in nonzero:
+        if not (index[0] in xc and index[1] in yc):  # very, very basic check; many "edgecases" will fail
+            continue
+        message += list(alphabet.keys())[list(alphabet.values()).index(255 - array[index[1], index[0]])]
     return message
 
 
