@@ -1,16 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="title">A-Channel Text Encoder</h1>
-    <br>
-    <blockquote class="para">
-        By slightly modifying the transparency, or alpha channel of certain pixels in an image,
-        you can<br>imperceptibly encode a message inside of an image, provided you share a key with
-        the recipient.
-    </blockquote>
+    <h1 class="title">Steganography Center</h1>
     <br>
     <ul>
-        <li class="coding-list"><a href="{{ url_for('encode') }}" class="btn btn-secondary mb-2 font-weight-bold">Encode Message</a></li>
-        <li class="coding-list"><a href="{{ url_for('decode') }}" class="btn btn-secondary mb-2 font-weight-bold">Decode Message</a></li>
+        <li class="coding-list"><a href="{{ url_for('rgb') }}" class="btn btn-secondary mb-2 font-weight-bold">RGB</a></li>
+        <li class="coding-list"><a href="{{ url_for('alpha') }}" class="btn btn-secondary mb-2 font-weight-bold">A-Channel</a></li>
     </ul>
 {% endblock %}
