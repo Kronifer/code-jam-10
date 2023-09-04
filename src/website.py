@@ -57,7 +57,7 @@ def decode_a():  # noqa: D103
 def encode_rgb():  # noqa: D103
     if request.method == "GET":
         return render_template("encode_rgb.html")
-    image, status = write_message_rgb(request.form["message"], request.form["key"])
+    image, status = write_message_rgb(request.form["message"].lower(), request.form["key"])
     if not status:
         return (
             "ERROR: Please make sure your message is not too long, and that you don't have any unicode characters in your message (no emojis).",  # noqa: E501
