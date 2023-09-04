@@ -16,11 +16,23 @@
           </button>
           <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url_for('alpha') }}">Alpha</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{{ url_for('alpha') }}" aria-expanded="false">
+                  Alpha
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{{ url_for('encode_a') }}">Encode</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('decode_a') }}">Decode</a></li>
+                </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url_for('rgb') }}">RGB</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{{ url_for('rgb') }}" aria-expanded="false">
+                  RGB
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{{ url_for('encode_rgb') }}">Encode</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('decode_rgb') }}">Decode</a></li>
+                </ul>
               </li>
             </ul>
              <div class="form-check form-switch ms-auto mt-2 me-2 text-center">
@@ -35,6 +47,14 @@
         </div>
     </nav>
     {% block content %} {% endblock %}
+    <footer class="bg-body-secondary text-center text-lg-start">
+      <!-- Copyright -->
+      <div class="text-center p-3">
+        © 2023 Copyright:
+        <a class="" href="#">What do I put here?</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
     <script>
         if (localStorage.theme == "dark"){
             $("input[id='lightSwitch']").prop('checked', true);
