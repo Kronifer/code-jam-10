@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200&display=swap');
 
+/* Set up Font */
 * {
     font-family: 'Roboto Slab', serif;
     margin: 0;
 }
 
+/* Style for title text */
 h1.title {
     font-weight: bold;
 }
@@ -14,6 +16,7 @@ h1.title, h4.title {
     margin-top: 40px;
 }
 
+/* Style for lists */
 ul {
     list-style: none;
     text-align: center;
@@ -21,25 +24,30 @@ ul {
     font-size: 20px;
 }
 
+/* Set up paragraph texts */
 blockquote.para {
     text-align: center;
 }
 
+/* Set up list items */
 ul li.coding-list:before{
     content: "\2192";
     margin: 1em;
 }
 
+/* center specific input field */
 .center-input {
     text-align-last: center;
     margin:auto;
 }
 
+/* Set up dropdown visibility */
 .dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0; /* remove the gap so it doesn't close */
 }
 
+/* Set up footer style */
 footer {
     position: fixed;
     left: 0;

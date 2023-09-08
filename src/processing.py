@@ -1,9 +1,11 @@
+# Import libraries
 import random
 import typing
 
 import numpy as np
 from PIL import Image
 
+# Set up acceptable characters
 ASCII_VALUES = list(range(97, 123)) + [32, 33, 44, 46, 63]  # "a"-"z", " ", "!", ",", "."
 
 

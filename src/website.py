@@ -1,3 +1,4 @@
+# Import libraries
 import base64
 from io import BytesIO
 
@@ -8,25 +9,30 @@ from .processing import (
     read_message_a, read_message_rgb, write_message_a, write_message_rgb
 )
 
+# Set-up Flask
 app = Flask(__name__)
 app.url_map.strict_slashes = False  # Fix issues with some browsers, thanks Grace
 
 
+# Routing and rendering homepage
 @app.route("/")
 def index():  # noqa: D103
     return render_template("index.html")
 
 
+# Routing and rendering alpha.html
 @app.route("/alpha")
 def alpha():  # noqa: D103
     return render_template("alpha.html")
 
 
+# Routing and rendering rgb.html
 @app.route("/rgb")
 def rgb():  # noqa: D103
     return render_template("rgb.html")
 
 
+# Routing and rendering alpha encoding
 @app.route("/alpha/encode", methods=["GET", "POST"])
 def encode_a():  # noqa: D103
     if request.method == "GET":
@@ -45,6 +51,7 @@ def encode_a():  # noqa: D103
     return render_template("display.html", src=f"data:image/png;base64,{base64.b64encode(io.read()).decode('utf-8')}")
 
 
+# Routing and rendering alpha decoding
 @app.route("/alpha/decode", methods=["GET", "POST"])
 def decode_a():  # noqa: D103
     if request.method == "GET":
@@ -53,6 +60,7 @@ def decode_a():  # noqa: D103
     return read_message_a(image, request.form["key"]), {"Content-Type": "text/plain"}
 
 
+# Routing and rendering rgb encoding
 @app.route("/rgb/encode", methods=["GET", "POST"])
 def encode_rgb():  # noqa: D103
     if request.method == "GET":
@@ -70,6 +78,7 @@ def encode_rgb():  # noqa: D103
     return render_template("display.html", src=f"data:image/png;base64,{base64.b64encode(io.read()).decode('utf-8')}")
 
 
+# Routing and rendering rgb decoding
 @app.route("/rgb/decode", methods=["GET", "POST"])
 def decode_rgb():  # noqa: D103
     if request.method == "GET":
