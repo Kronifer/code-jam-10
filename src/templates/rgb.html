@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="title">RGB Image Text Encoder</h1>
+    <br>
+    <blockquote class="para">
+        By generating colors that correspond to characters in a message using a pre-shared key,
+        we can hide a message within an image filled with random colors.
+    </blockquote>
+    <br>
+    <ul>
+        <li class="coding-list"><a href="{{ url_for('encode_rgb') }}" class="btn btn-secondary mb-2 font-weight-bold">Encode Message</a></li>
+        <li class="coding-list"><a href="{{ url_for('decode_rgb') }}" class="btn btn-secondary mb-2 font-weight-bold">Decode Message</a></li>
+    </ul>
+{% endblock %}
