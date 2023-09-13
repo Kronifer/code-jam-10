@@ -1,36 +1,26 @@
-# Code Jam 10
+# Steganography Center
+The Wheels of Cheese submission for [Python Discord's Summer Code Jam 2023](https://www.pythondiscord.com/events/code-jams/10/).
+![image](https://github.com/Kronifer/code-jam-10/assets/44979306/d4d084b4-df06-402b-9643-bac8c2697081)
 
-## Dev Setup
-
+## Setup
 ```sh
-$ pip install poetry # Installs poetry to your system if it is not already
-$ poetry install # Installs the project in a virtual environment
-$ poetry run pre-commit install # Installs pre-commit, which will prevent you from committing should your code not pass linting
-$ git config --local push.autoSetupRemote true # auto pushes and sets up your remote origin branch
+git clone https://github.com/kronifer/code-jam-10
+cd code-jam-10
+poetry install
 ```
 
-## Programming
-Make sure your commit message follows [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+## Running the Project
+Windows
 ```sh
-$ poetry shell # Opens the virtual environment in your shell, allowing you to access the installed dependencies
-# Make whatever changes
-$ git add .
-$ poetry run task format # Formats your code using black and sorts your import using isort. DO THIS BEFORE COMMITTING!
-$ git commit -m "message" # Commits your code to git. Make sure you format or your commit will fail!
-$ git push # Pushes to your current remote branch
+poetry run waitress-serve --host "127.0.0.1" src.website:app
+```
+Linux
+```sh
+poetry run gunicorn src.website:app
 ```
 
-## Running the program
-Linux:
-```sh
-$ poetry shell
-$ gunicorn src.website:app
-```
-
-Windows:
-```sh
-$ poetry shell
-$ waitress-serve --host "127.0.0.1" src.website:app
-```
-
-Contributors, please let me know if any instructions are unclear!
+## Contributors
+[Kronifer](https://github.com/kronifer)
+[Today100](https://github.com/Today100)
+[ilcheese2](https://github.com/ilcheese2)
+[Chooky](https://github.com/JoelKirkby)
