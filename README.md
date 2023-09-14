@@ -1,7 +1,6 @@
 # Steganography Center
 The Wheels of Cheese submission for [Python Discord's Summer Code Jam 2023](https://www.pythondiscord.com/events/code-jams/10/).
-![image](https://github.com/Kronifer/code-jam-10/assets/44979306/d4d084b4-df06-402b-9643-bac8c2697081) (put video of project here soon)
-
+https://github-production-user-asset-6210df.s3.amazonaws.com/44979306/267836697-88b86151-e1ef-497e-973e-abc824de1120.mp4
 ## Setup
 ```sh
 git clone https://github.com/kronifer/code-jam-10
